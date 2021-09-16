@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "853968681284",
+    "firebase_url": "https://wlhgames-default-rtdb.firebaseio.com",
+    "project_id": "wlhgames",
+    "storage_bucket": "wlhgames.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853968681284:android:d297b92dad07c45a2dff11",
+        "android_client_info": {
+          "package_name": "com.wlhgames.idtheft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853968681284-vvapp3rs1bmjsd1gkigvmodsbovdbflk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvIvpMO2eGrx-nyOvbgkh1PK_uWZSjKgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853968681284-vvapp3rs1bmjsd1gkigvmodsbovdbflk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
