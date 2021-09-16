@@ -6,9 +6,8 @@ A tool for the board game "Identity Theft". Allows users to:
 * UPCOMING: send ID guesses to specific players
 
 ## Getting Started
-
-`flutter pub update`
-`flutter pub upgrade`
-`flutter pub get`
+`flutter clean`  
+`flutter pub upgrade`  
+`flutter pub get`  
 plug your device in...
 `flutter run`
