@@ -9,5 +9,5 @@ A tool for the board game "Identity Theft". Allows users to:
 `flutter clean`  
 `flutter pub upgrade`  
 `flutter pub get`  
-plug your device in...
+plug your device in...  
 `flutter run`
