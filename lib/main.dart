@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:identity_thief/pages/tracker_page.dart';
+import 'package:identity_thief/state/tracker_state.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,8 +31,8 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TrackerPage(),
+      home: ChangeNotifierProvider(
+          create: (context) => TrackerState(), child: TrackerPage()),
     );
   }
 }
-
