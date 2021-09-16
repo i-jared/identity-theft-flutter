@@ -21,6 +21,8 @@ class NumberStatusAdapter extends TypeAdapter<NumberStatus> {
         return NumberStatus.yes;
       case 3:
         return NumberStatus.no;
+      case 4:
+        return NumberStatus.conditionalNo;
       default:
         return NumberStatus.unknown;
     }
@@ -40,6 +42,9 @@ class NumberStatusAdapter extends TypeAdapter<NumberStatus> {
         break;
       case NumberStatus.no:
         writer.writeByte(3);
+        break;
+      case NumberStatus.conditionalNo:
+        writer.writeByte(4);
         break;
     }
   }
