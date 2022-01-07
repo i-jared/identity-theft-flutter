@@ -29,7 +29,9 @@ class _WaitingRoomState extends State<WaitingRoom> {
                 builder: (context) => TrackerPage(code: widget.code)),
             (route) => false);
       }
-      textController.addListener(() => setState(() {}));
+      textController.addListener(() {
+        if (mounted) setState(() {});
+      });
     });
 
     textController = TextEditingController();
@@ -59,6 +61,9 @@ class _WaitingRoomState extends State<WaitingRoom> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            Center(
+                                child: Text('code: ${widget.code}',
+                                    style: TextStyle(fontSize: 30))),
                             Center(
                               child: Text(
                                   '${data['players']['groupSize']} people in the group now'),

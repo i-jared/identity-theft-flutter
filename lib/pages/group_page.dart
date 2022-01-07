@@ -53,42 +53,62 @@ class _GroupPageState extends State<GroupPage> {
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        // get document
-                        DocumentReference documentReference = FirebaseFirestore
-                            .instance
-                            .collection('games')
-                            .doc(textController.text);
-                        // run transaction
-                        await FirebaseFirestore.instance
-                            .runTransaction((transaction) async {
-                          DocumentSnapshot snapshot =
-                              await transaction.get(documentReference);
-                          if (!snapshot.exists) {
-                            throw Exception("User does not exist!");
-                          }
-                          // make updates
-                          final data = snapshot.data() as Map<String, dynamic>;
-                          final players = data['players'];
-                          players[user.uid] = {
-                            'name': '',
-                            'guesses': {},
-                            'numbers': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-                          };
-                          players['groupSize'] =
-                              data['players']['groupSize'] + 1;
-                          players['ids'] = [
-                            ...data['players']['ids'],
-                            user.uid
-                          ];
-                          transaction
-                              .update(documentReference, {'players': players});
-                        });
+                        try {
+                          // get document
+                          DocumentReference documentReference =
+                              FirebaseFirestore.instance
+                                  .collection('games')
+                                  .doc(textController.text);
+                          // run transaction
+                          await FirebaseFirestore.instance
+                              .runTransaction((transaction) async {
+                            DocumentSnapshot snapshot =
+                                await transaction.get(documentReference);
+                            if (!snapshot.exists) {
+                              //todo display that group does not exist
+                              const snackBar = SnackBar(
+                                content: Text('Group does not exist'),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                            // make updates if new player
+                            final data =
+                                snapshot.data() as Map<String, dynamic>;
+                            final players = data['players'];
+                            if (players[user.uid] == null) {
+                              players[user.uid] = {
+                                'name': '',
+                                'numbers': {
+                                  '1': 0,
+                                  '2': 0,
+                                  '3': 0,
+                                  '4': 0,
+                                  '5': 0
+                                },
+                              };
+                              players['groupSize'] =
+                                  data['players']['groupSize'] + 1;
+                              players['ids'] = [
+                                ...data['players']['ids'],
+                                user.uid
+                              ];
+                              transaction.update(
+                                  documentReference, {'players': players});
+                            }
+                          });
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    WaitingRoom(code: textController.text)));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      WaitingRoom(code: textController.text)));
+                        } catch (e) {
+                          const snackBar = SnackBar(
+                            content: Text('Something went wrong...'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       },
                       child: const Text('Join'))
                 ],
@@ -111,9 +131,9 @@ class _GroupPageState extends State<GroupPage> {
                       'groupSize': 1,
                       'ids': [user.uid],
                       'names': [],
+                      'guesses': {},
                       user.uid: {
                         'name': '',
-                        'guesses': {},
                         'numbers': {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0},
                       },
                     }

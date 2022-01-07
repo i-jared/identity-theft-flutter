@@ -105,7 +105,7 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   charcode:
     dependency: transitive
     description:
@@ -380,6 +380,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.0"
+  keyboard_dismisser:
+    dependency: "direct main"
+    description:
+      name: keyboard_dismisser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   lints:
     dependency: transitive
     description:
@@ -514,12 +521,12 @@ packages:
     source: hosted
     version: "4.2.3"
   provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.0"
+    version: "6.0.2"
   pub_semver:
     dependency: transitive
     description:
@@ -636,7 +643,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   watcher:
     dependency: transitive
     description:
