@@ -14,6 +14,7 @@ class GroupPage extends StatefulWidget {
 
 class _GroupPageState extends State<GroupPage> {
   late TextEditingController textController;
+  late bool loading = false;
   @override
   void initState() {
     super.initState();
@@ -52,65 +53,71 @@ class _GroupPageState extends State<GroupPage> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () async {
-                        try {
-                          // get document
-                          DocumentReference documentReference =
-                              FirebaseFirestore.instance
-                                  .collection('games')
-                                  .doc(textController.text);
-                          // run transaction
-                          await FirebaseFirestore.instance
-                              .runTransaction((transaction) async {
-                            DocumentSnapshot snapshot =
-                                await transaction.get(documentReference);
-                            if (!snapshot.exists) {
-                              //todo display that group does not exist
-                              const snackBar = SnackBar(
-                                content: Text('Group does not exist'),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                            // make updates if new player
-                            final data =
-                                snapshot.data() as Map<String, dynamic>;
-                            final players = data['players'];
-                            if (players[user.uid] == null) {
-                              players[user.uid] = {
-                                'name': '',
-                                'numbers': {
-                                  '1': 0,
-                                  '2': 0,
-                                  '3': 0,
-                                  '4': 0,
-                                  '5': 0
-                                },
-                              };
-                              players['groupSize'] =
-                                  data['players']['groupSize'] + 1;
-                              players['ids'] = [
-                                ...data['players']['ids'],
-                                user.uid
-                              ];
-                              transaction.update(
-                                  documentReference, {'players': players});
-                            }
-                          });
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      WaitingRoom(code: textController.text)));
-                        } catch (e) {
-                          const snackBar = SnackBar(
-                            content: Text('Something went wrong...'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      },
-                      child: const Text('Join'))
+                      onPressed: loading
+                          ? null
+                          : () async {
+                              setState(() => loading = true);
+                              try {
+                                // get document
+                                DocumentReference documentReference =
+                                    FirebaseFirestore.instance
+                                        .collection('games')
+                                        .doc(textController.text);
+                                // run transaction
+                                await FirebaseFirestore.instance
+                                    .runTransaction((transaction) async {
+                                  DocumentSnapshot snapshot =
+                                      await transaction.get(documentReference);
+                                  if (!snapshot.exists) {
+                                    //todo display that group does not exist
+                                    const snackBar = SnackBar(
+                                      content: Text('Group does not exist'),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                  // make updates if new player
+                                  final data =
+                                      snapshot.data() as Map<String, dynamic>;
+                                  final players = data['players'];
+                                  if (players[user.uid] == null) {
+                                    players[user.uid] = {
+                                      'name': '',
+                                      'numbers': {
+                                        '1': 0,
+                                        '2': 0,
+                                        '3': 0,
+                                        '4': 0,
+                                        '5': 0
+                                      },
+                                    };
+                                    players['groupSize'] =
+                                        data['players']['groupSize'] + 1;
+                                    players['ids'] = [
+                                      ...data['players']['ids'],
+                                      user.uid
+                                    ];
+                                    transaction.update(documentReference,
+                                        {'players': players});
+                                  }
+                                });
+                                setState(() => loading = false);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WaitingRoom(
+                                            code: textController.text)));
+                              } catch (e) {
+                                const snackBar = SnackBar(
+                                  content: Text('Something went wrong...'),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                            },
+                      child: loading
+                          ? Center(child: CircularProgressIndicator())
+                          : const Text('Join'))
                 ],
               ),
               ElevatedButton(

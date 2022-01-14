@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         create: (context) => TrackerState(),
         child: MaterialApp(
           color: Colors.white,
-          title: 'Flutter Demo',
+          title: 'Hacker Tracker',
           theme: ThemeData(
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,

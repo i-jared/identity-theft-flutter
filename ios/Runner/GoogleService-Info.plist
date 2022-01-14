@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>853968681284-voehgoao62fu6li8estgi8c5jbe4s1ld.apps.googleusercontent.com</string>
+	<string>853968681284-jc92pd6j2einj9e34ugg4o1a98grubl0.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.853968681284-voehgoao62fu6li8estgi8c5jbe4s1ld</string>
+	<string>com.googleusercontent.apps.853968681284-jc92pd6j2einj9e34ugg4o1a98grubl0</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCRTLMJpptTF0OODlYHSKyGJdykrf0T078</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.identityThief</string>
+	<string>com.wlhgames.idtheft</string>
 	<key>PROJECT_ID</key>
 	<string>wlhgames</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:853968681284:ios:aa05fd3acf35a8722dff11</string>
+	<string>1:853968681284:ios:4c53b1ff567f8e662dff11</string>
 	<key>DATABASE_URL</key>
 	<string>https://wlhgames-default-rtdb.firebaseio.com</string>
 </dict>

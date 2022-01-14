@@ -13,6 +13,7 @@ class WaitingRoom extends StatefulWidget {
 class _WaitingRoomState extends State<WaitingRoom> {
   Stream<DocumentSnapshot>? groupStream;
   late TextEditingController textController;
+  late bool loading = false;
 
   @override
   void initState() {
@@ -84,6 +85,7 @@ class _WaitingRoomState extends State<WaitingRoom> {
                                       onPressed: textController.text.isEmpty
                                           ? null
                                           : () async {
+                                              setState(() => loading = true);
                                               DocumentReference
                                                   documentReference =
                                                   FirebaseFirestore.instance
@@ -114,6 +116,7 @@ class _WaitingRoomState extends State<WaitingRoom> {
                                                     documentReference,
                                                     {'players': players});
                                               });
+                                              setState(() => loading = false);
                                             },
                                       child: const Text('Set')),
                                 ],
@@ -130,7 +133,10 @@ class _WaitingRoomState extends State<WaitingRoom> {
                                               .doc(widget.code)
                                               .update({'started': true});
                                         },
-                                  child: const Text('Start Game')),
+                                  child: loading
+                                      ? Center(
+                                          child: CircularProgressIndicator())
+                                      : const Text('Start Game')),
                           ],
                         ),
                       );
