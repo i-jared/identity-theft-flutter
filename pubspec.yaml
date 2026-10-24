@@ -44,6 +44,7 @@ dependencies:
   keyboard_dismisser: ^2.0.0
 
 dev_dependencies:
+  archive: 3.3.8
   flutter_test:
     sdk: flutter
   hive_generator: ^1.0.0
@@ -54,7 +55,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -101,3 +102,6 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/logo.png"
+
+dependency_overrides:
+  archive: 3.3.8
